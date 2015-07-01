@@ -2,12 +2,16 @@
 {% load staticfiles %}
 {% block content %}
 {% for post in posts %}
-                    <div class="post">
-                        <h2><a href="">{{ post.title }}</a></h2>
-                         <div class="date">
-                            {{ post.published_date }}
-                        </div>
-                        <p>{{ post.text|linebreaks }}</p>
-                    </div>
+<div class="post">
+    <h2>
+        <a href="{% url 'site1.views.post_detail' pk=post.pk %}">{{ post.title }}</a>
+        <a href="{% url 'site1.views.post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+    </h2>
+    <br>
+    <div class="date">
+        {{ post.published_date }}
+    </div>
+    <p>{{ post.text|linebreaks }}</p>
+</div>
 {% endfor %}
 {% endblock %}
