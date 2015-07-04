@@ -2,7 +2,14 @@
 {% block content %}
     <h1>New post</h1>
     <form method="POST" class="post-form" action="site1/post_new/">{% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <textarea class="form-control" rows="10" id="text" name="text"></textarea>
+        </div>
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}

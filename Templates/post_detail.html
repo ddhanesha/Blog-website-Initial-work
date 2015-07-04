@@ -1,16 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container">
+    {% if user.is_authenticated %}
     <div class="post">
         {% if post.published_date %}
             <div class="date">
                 {{ post.published_date }}
             </div>
         {% endif %}
-        <h1>
+        <h1 style="color:#337ab7;">
             {{ post.title }}
+            {% if user.is_staff %}
             <a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            {% endif %}
         </h1>
         <p>{{ post.text|linebreaks }}</p>
     </div>
+    {% else %}
+    <h4>You need to login to read this blog. <a href="/site1/login/">Click here</a> to continue. </h4>
+    {% endif %}
+    <form method="post">{% csrf_token %}
+        <div class="form-group">
+            <label>Comment</label>
+            <textarea class="form-control" name="text" id="comments" rows="10"></textarea>
+        </div>
+        <button type="submit" id="btn" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 {% endblock %}

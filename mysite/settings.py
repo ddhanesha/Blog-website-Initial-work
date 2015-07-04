@@ -99,3 +99,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+LOGIN_URL = '/site1/login/'
+LOGIN_REDIRECT_URL= '/site1/post_list/'
