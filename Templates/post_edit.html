@@ -2,9 +2,16 @@
 
 {% block content %}
 <div class= "container">
-    <h2>Edit post</h2>
+<h2>Edit post</h2>
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{form.title.value}}">
+        </div>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <textarea class="form-control" rows="10" id="text" name="text">{{form.text.value}}</textarea>
+        </div>
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 </div>

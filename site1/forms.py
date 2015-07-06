@@ -1,5 +1,5 @@
 from django import forms
-from site1.models import Post
+from site1.models import Post,Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -20,7 +20,9 @@ class MyRegistrationForm(UserCreationForm):
             raise forms.ValidationError(u'Username %s is already in use' % username)
         return username
 
-class Comment(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
-        model = Post
-        fields= ['text']
+        model= Comment
+        fields= ('author','text')
+
+
