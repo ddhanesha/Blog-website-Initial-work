@@ -6,9 +6,6 @@
             <div class="post">
                 <h3>
                     <a href="{% url 'site1.views.post_detail' pk=post.pk %}">{{ post.title }}</a>
-                    {% if user.is_staff %}
-                    <a href="{% url 'post_edit' pk=post.pk %}" class="top-menu"><span class="glyphicon glyphicon-pencil"></span></a>
-                    {% endif %}
                 </h3>
                 <br>
                {% if post.published_date %}
@@ -17,7 +14,7 @@
                     </div>
                 {% endif %}
                 <p>{{ post.text|linebreaks }}</p>
-                <a href="{% url 'site1.views.post_detail' pk=post.pk%}">Comments: {{post.approved_comments.count}}</a>
+                <a href="{% url 'site1.views.post_detail' pk=post.pk%}">Comments: {{post.comments.count}}</a>
             </div>
         {% endfor %}
 </div>

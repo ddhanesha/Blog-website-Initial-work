@@ -12,7 +12,7 @@ urlpatterns = patterns('',
         url(r'^login/',login,kwargs={'template_name':'login.html'},name='login'),
         url(r'^logout/',logout,kwargs={'template_name':'Logout.html'},name='logout'),
         url(r'^about_us/',about_us),
-        url(r'^(?P<pk>[0-9]+)/add_comment/',add_comment),
+        url(r'^(?P<pk>[0-9]+)/add_comment/',add_comment,name='add_comment'),
         url(r'^comment/(?P<pk>[0-9]+)/approve/$', comment_approve, name='comment_approve'),
         url(r'^comment/(?P<pk>[0-9]+)/remove/$', comment_remove, name='comment_remove'),
 )

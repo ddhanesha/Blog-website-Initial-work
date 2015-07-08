@@ -9,34 +9,40 @@
                     <p>Date: {{ post.created_date }} </p>
                 </div>
             {% endif %}
-            <h1 style="color:#337ab7;">
+            <h2 style="color:#337ab7;">
                 {{ post.title }}
                 {% if user.is_staff %}
                 <a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
                 {% endif %}
-            </h1>
+            </h2>
             <p>{{ post.text|linebreaks }}</p>
         </div>
-            <a class="btn btn-default" href="{% url 'add_comment' pk=post.pk %}">Add comment</a>
+        <h4>Comments</h4>
             {% for comment in post.comments.all %}
                 {% if user.is_authenticated or comment.approved %}
                 <div class="comment">
+                    <strong>{{ comment.author }}</strong>
                     <div class="date">
                         {{ comment.created_date }}
-                        {% if not comment.approved %}
-                            <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                            <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
-                        {% endif %}
+                            {% if not comment.approved %}
+                                <a id="remove" class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+                                {% if user.is_staff %}
+                                <a id="apporve" class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </a>
+                                {% endif %}
+                            {% endif %}
                     </div>
-                    <strong>{{ comment.author }}</strong>
                     <p>{{ comment.text|linebreaks }}</p>
                 </div>
                 {% endif %}
-            {% empty %}
-                <p>No comments here yet :(</p>
             {% endfor %}
+    <a class="btn btn-default" href="{% url 'add_comment' pk=post.pk %}">Add comment</a>
     {% else %}
         <h4>You need to login to read this blog. <a href="/site1/login/">Click here</a> to continue. </h4>
     {% endif %}
 </div>
+
 {% endblock %}

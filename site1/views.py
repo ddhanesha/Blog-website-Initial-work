@@ -67,11 +67,11 @@ def add_comment(request,pk):
         if form.is_valid():
             comment= form.save(commit=False)
             comment.post= post
-            comment.post()
-            return redirect(request,'site1.views.post_detail',pk=post.pk)
-        else:
-            form= CommentForm()
-        return render(request,'add_comment.html',{'form':form})
+            comment.save()
+            return redirect('site1.views.post_detail',pk=post.pk)
+    else:
+        form= CommentForm()
+    return render(request,'add_comment.html',{'form':form})
 
 @login_required
 def comment_approve(request, pk):
